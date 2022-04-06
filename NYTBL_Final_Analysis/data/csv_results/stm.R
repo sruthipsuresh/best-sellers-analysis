@@ -26,8 +26,8 @@ opt <- parse_args(opt_parser)
 
 # Prep data
 data <- read.csv(opt$csv_file,encoding = "UTF-8")
-title <- data["Title"]
-desc <- data["Description"]
+title <- data["items__volumeInfo__title"]
+desc <- data["items__volumeInfo__description"]
 names(title)[1] <- "text"
 title$doc_id <- 1:nrow(title)
 names(desc)[1] <- "text"
