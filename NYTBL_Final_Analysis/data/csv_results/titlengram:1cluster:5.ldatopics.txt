@@ -1,0 +1,6 @@
+"Var1" "Freq"
+"1" "topic1" 2638
+"2" "topic2" 2672
+"3" "topic3" 2592
+"4" "topic4" 2642
+"5" "topic5" 2692
