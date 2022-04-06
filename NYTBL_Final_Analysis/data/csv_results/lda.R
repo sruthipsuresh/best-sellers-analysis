@@ -28,6 +28,7 @@ opt <- parse_args(opt_parser)
 #Prep data
 data <- read.csv(opt$csv_file,encoding = "UTF-8")
 data <- unique(data, by = "Title")
+data <- unique(data, by = "ISBN_IDENTIFIER_2")
 
 title <- data["Title"]
 desc <- data["Description"]
