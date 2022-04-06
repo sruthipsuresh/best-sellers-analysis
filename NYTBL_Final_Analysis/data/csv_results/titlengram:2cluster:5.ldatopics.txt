@@ -1,0 +1,6 @@
+"Var1" "Freq"
+"1" "topic1" 1909
+"2" "topic2" 1888
+"3" "topic3" 1895
+"4" "topic4" 1972
+"5" "topic5" 1919
