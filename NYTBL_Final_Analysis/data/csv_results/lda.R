@@ -36,7 +36,7 @@ names(title)[1] <- "text"
 title$doc_id <- 1:nrow(title)
 names(desc)[1] <- "text"
 desc$doc_id <- 1:nrow(desc)
-
+print("done proc")
 type = opt$titleordesc
 if (type == "title"){
   corp = title}
@@ -47,8 +47,8 @@ if (type == "desc"){
 title_toks <- tokens(corpus(Corpus(DataframeSource(corp))), remove_punct = TRUE, remove_numbers = TRUE, remove_symbol = TRUE)
 
 #Remove bestseller unique words
-stopwordsbestseller<- readLines("/home/sruthipsuresh/nytanalysis/best-sellers-analysis/NYTBL_Final_Analysis/scripts/r_scripts/bestsellers.stopwords.txt", encoding = "UTF-8")
-
+stopwordsbestseller<- readLines("bestsellers.stopwords.txt", encoding = "UTF-8")
+print("unique")
 
 
 #Remove standard stop words
@@ -60,7 +60,7 @@ title_toks <- tokens_ngrams(title_toks, n = opt$ngram)
 dfm_title <- dfm(title_toks) %>%
   dfm_trim(termfreq_type = "quantile",
            min_docfreq = opt$minfreq, docfreq_type = "prop")
-
+print("dfm")
 
 title_lda_topic_model <- textmodel_lda(dfm_title, k = opt$numcluster)
 title_lda_topics <- terms(title_lda_topic_model,opt$numcluster)
@@ -69,11 +69,11 @@ tableop <- table(title_lda_topic_model$topic)
 write.table(tableop, file = paste0(opt$titleordesc, "ngram:", opt$ngram, "cluster:", opt$numcluster, ".ldatopics.txt"))
 
 dtmtitle <- convert(dfm_title, to = "topicmodels")
-
+print("lmao table")
 
 raw.sum=apply(dtmtitle,1,FUN=sum) #sum by raw each raw of the table
 dtmtitle=dtmtitle[raw.sum!=0,]
-
+print("erm plot")
 plot.new()
 
 jpeg(file = paste0(opt$titleordesc, "ngram:", opt$ngram, "cluster:", opt$numcluster, ".ldaclusters.jpg"))
