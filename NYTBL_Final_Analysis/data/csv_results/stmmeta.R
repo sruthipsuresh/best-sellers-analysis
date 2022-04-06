@@ -26,16 +26,16 @@ opt <- parse_args(opt_parser)
 #Use function called textprocessor to create obj called LargeTextProcessor
 # Prep data
 data <- read.csv(opt$csv_file,encoding = "UTF-8")
-data$year1 <- as.character(data$Published_Date)
+data$year1 <- as.character(data$items__volumeInfo__publishedDate)
 #data$year2 <- as.character(data$year2)
 
 stopwordsbestseller<- readLines("bestsellers.stopwords.txt", encoding = "UTF-8")
 type = opt$titleordesc
 if (type == "title"){
-  corp = data$Title}
+  corp = data$items__volumeInfo__title}
 
 if (type == "desc"){
-  corp = data$Description}
+  corp = data$items__volumeInfo__description}
 
 processed1 <- textProcessor(corp,metadata = data, stem=FALSE, customstopwords = stopwordsbestseller)
 out1 <- prepDocuments(processed1$documents, processed1$vocab, processed1$meta)
